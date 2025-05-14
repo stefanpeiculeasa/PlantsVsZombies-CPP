@@ -3,7 +3,7 @@
 #include "grid.h"
 
 Zombie::Zombie(const int x, const int y, const int health, const int speed, std::string name, const int ticks, const int damage, const int scale)
-    : Entity(x,y, health,move(name),ticks,damage,scale), speed(speed) {}
+    : Entity(x,y, health,std::move(name),ticks,damage,scale), speed(speed) {}
 
 void Zombie::moveForward() {
     if (canMove) {
