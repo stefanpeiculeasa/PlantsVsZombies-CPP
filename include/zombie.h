@@ -1,0 +1,23 @@
+#ifndef ZOMBIE_H
+#define ZOMBIE_H
+
+#include "entity.h"
+#include "plant.h"
+#include "utils.h"
+
+class Zombie : public Entity {
+protected:
+    int speed;
+
+public:
+    Zombie(int x,int y,int health,int speed, std::string name,int ticks,int damage,int scale);
+
+    void moveForward();
+
+    void attack(std::unique_ptr<Entity>& plant);
+
+    void update(Grid& grid) override;
+};
+
+
+#endif //ZOMBIE_H

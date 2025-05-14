@@ -127,10 +127,16 @@ FetchContent_MakeAvailable(googletest)
 
 # find_package(Threads REQUIRED)
 
+find_package(SFML 2.6 COMPONENTS system window graphics audio REQUIRED)
+
+
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
 add_executable(${MAIN_EXECUTABLE_NAME} main.cpp ${SOURCES})
+
+target_link_libraries(${MAIN_EXECUTABLE_NAME} sfml-system sfml-window sfml-graphics sfml-audio)
+
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
 # NOTE: RUN_SANITIZERS is optional, if it's not present it will default to true
