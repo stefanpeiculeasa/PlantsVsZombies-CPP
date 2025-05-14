@@ -1,7 +1,6 @@
 #ifndef SUN_H
 #define SUN_H
 
-#include <cmath>
 #include "entity.h"
 #include "utils.h"
 

@@ -1,7 +1,3 @@
-//
-// Created by alfredo on 4/24/25.
-//
-
 #ifndef GAME_H
 #define GAME_H
 
@@ -38,9 +34,9 @@ public:
                         window.close();
                         break;
                     case sf::Event::MouseButtonPressed: {
-                        sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                        const sf::Vector2i mousePos = sf::Mouse::getPosition(window);
                         sf::Vector2f mouseF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
-                        float clickBoxSize = keyCoords["hitboxSize"][0].first.x;
+                        const float clickBoxSize = static_cast<float>(keyCoords["hitboxSize"][0].first.x);
 
                         for (auto& entity : grid.getEntities()) {
                             if (dynamic_cast<Sun*>(entity.get()) && entity->getHitbox().getGlobalBounds().contains(mouseF)) {
@@ -51,7 +47,7 @@ public:
                         }
 
                         for (auto& center : keyCoords["tileCenters"]) {
-                            sf::Vector2f scaledCenter(center.first.x, center.first.y);
+                            sf::Vector2f scaledCenter(static_cast<float>(center.first.x), static_cast<float>(center.first.y));
 
                             sf::FloatRect clickBox(scaledCenter.x - clickBoxSize / 2,scaledCenter.y - clickBoxSize / 2,clickBoxSize,clickBoxSize);
 
@@ -101,7 +97,7 @@ public:
 
             }
             grid.update(keyCoords);
-            renderer.renderFrame(window,grid,grid.getSun(),grid.getPlayerHp(),keyCoords,selectedPlant);
+            renderer.renderFrame(window,grid,grid.getSun(),grid.getPlayerHp(),selectedPlant);
         }
     }
 

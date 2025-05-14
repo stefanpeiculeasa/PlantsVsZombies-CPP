@@ -1,9 +1,10 @@
 #include "entity.h"
+#include "utils.h"
 
 Entity::Entity(int x, int y, int health, std::string name, int ticks, int damage, int scale) : x(x), y(y), health(health), ticks(ticks), maxTicks(ticks),damage(damage), name(move(name)) {
-    hitbox.setSize(sf::Vector2f(GameUtils::keyCoords["hitboxSize"][0].first.x,GameUtils::keyCoords["hitboxSize"][0].first.y));
-    hitbox.setScale(scale,scale);
-    hitbox.setPosition(x,y);
+    hitbox.setSize(sf::Vector2f(static_cast<float>(GameUtils::keyCoords["hitboxSize"][0].first.x),static_cast<float>(GameUtils::keyCoords["hitboxSize"][0].first.y)));
+    hitbox.setScale(static_cast<float>(scale),static_cast<float>(scale));
+    hitbox.setPosition(static_cast<float>(x),static_cast<float>(y));
     }
 
 

@@ -2,7 +2,7 @@
 #define GRID_H
 
 #include "entity.h"
-#include "plant.h"
+#include "unordered_map"
 
 class Grid {
 
@@ -23,7 +23,7 @@ public:
     void takeDamage(int dmg);
     void decSun(int sun);
     void addSun(int sun);
-    void updateCoords(std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>> keyCoords);
+    void updateCoords(const std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>> &keyCoords);
     std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>>& getCoords();
     void handleClick(sf::Vector2i mousePos);
 

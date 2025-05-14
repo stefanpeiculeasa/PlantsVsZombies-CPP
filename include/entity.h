@@ -9,9 +9,6 @@
 #include <vector>
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include "utils.h"
-#include <cstdlib>
-#include <ctime>
 
 class Grid;
 

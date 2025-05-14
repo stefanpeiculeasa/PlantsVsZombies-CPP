@@ -8,14 +8,13 @@ Zombie::Zombie(const int x, const int y, const int health, const int speed, std:
 void Zombie::moveForward() {
     if (canMove) {
         x-=speed;
-        hitbox.setPosition(x,y);
+        hitbox.setPosition(static_cast<float>(x),static_cast<float>(y));
     }
 }
 
-void Zombie::attack(std::unique_ptr<Entity>& plant) {
+void Zombie::attack(const std::unique_ptr<Entity>& plant) {
     ticks -= 1;
     if (ticks == 0){
-        std::cout << "attacked" << std::endl;
         plant->takeDamage(damage);
         ticks = maxTicks;
     }
@@ -29,11 +28,9 @@ void Zombie::update(Grid &grid) {
 
     moveForward();
 
-    const auto& coords = grid.getCoords();
-    if (coords.contains("zombieHit")) {
+    if (const auto& coords = grid.getCoords(); coords.contains("zombieHit")) {
         for (const auto& coord : coords.at("zombieHit")) {
-            sf::FloatRect hitbox = this->getHitbox().getGlobalBounds();
-            if (hitbox.contains(static_cast<sf::Vector2f>(coord.first))) {
+            if (sf::FloatRect hitbox = this->getHitbox().getGlobalBounds(); hitbox.contains(static_cast<sf::Vector2f>(coord.first))) {
                 grid.takeDamage(this->getDamage());
                 this->setDeletionMark(true);
             }

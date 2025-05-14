@@ -9,4 +9,4 @@ public:
 };
 
 
-#endif //BASICZOMBIE_H
+#endif

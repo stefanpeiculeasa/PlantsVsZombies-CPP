@@ -2,7 +2,6 @@
 #define ZOMBIE_H
 
 #include "entity.h"
-#include "plant.h"
 #include "utils.h"
 
 class Zombie : public Entity {
@@ -14,7 +13,7 @@ public:
 
     void moveForward();
 
-    void attack(std::unique_ptr<Entity>& plant);
+    void attack(const std::unique_ptr<Entity>& plant);
 
     void update(Grid& grid) override;
 };

@@ -134,7 +134,8 @@ FetchContent_MakeAvailable(googletest sfml)
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
 
 # Create the executable from your source files
-add_executable(${MAIN_EXECUTABLE_NAME} main.cpp ${SOURCES})
+add_executable(${MAIN_EXECUTABLE_NAME} main.cpp ${SOURCES}
+        src/sunflower.cpp)
 
 # Link SFML libraries (system, window, graphics, audio)
 target_link_libraries(${MAIN_EXECUTABLE_NAME} sfml-system sfml-window sfml-graphics sfml-audio)
@@ -159,7 +160,7 @@ endif()
 ###############################################################################
 
 # Copy any additional necessary files
-copy_files(FILES tastatura.txt COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
+# copy_files(FILES tastatura.txt COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
 
 # Uncomment below if you need additional copy functionality
 # copy_files(FILES tastatura.txt config.json DIRECTORY images sounds COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})

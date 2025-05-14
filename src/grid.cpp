@@ -1,4 +1,5 @@
 #include "grid.h"
+#include "plant.h"
 
 void Grid::addEntity(std::unique_ptr<Entity> entity) {
     if (const auto* pPtr = dynamic_cast<Plant*>(entity.get())) {
@@ -48,7 +49,7 @@ void Grid::addSun(int sun) {
     this->sun += sun;
 }
 
-void Grid::updateCoords(std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>> keyCoords) {
+void Grid::updateCoords(const std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>> &keyCoords) {
     this->keyCoords = keyCoords;
 }
 
@@ -56,6 +57,6 @@ std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>>& Gri
     return keyCoords;
 }
 
-void Grid::handleClick(sf::Vector2i mousePos) {
-
-}
+// void Grid::handleClick(sf::Vector2i mousePos) {
+//
+// }

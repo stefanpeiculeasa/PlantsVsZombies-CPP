@@ -48,13 +48,13 @@ class Renderer {
 
     TextureManager sunTextureManager;
     sf::Sprite mapSprite;
-    unsigned int scale;
+    int scale;
     sf::Font font;
     sf::Text sunText,hpText,selectedPlantText;
 
 public:
 
-    Renderer(sf::RenderWindow& window) {
+    explicit Renderer(sf::RenderWindow& window) {
         // calculates and loads the map
         const unsigned int mapWidth = sunTextureManager.get("map").getSize().x;
         const unsigned int mapHeight= sunTextureManager.get("map").getSize().y;
@@ -67,8 +67,8 @@ public:
         const unsigned int windowHeight = mapHeight * scale;
         window.create(sf::VideoMode(windowWidth,windowHeight),"Plants vs Victor",sf::Style::Close);
         mapSprite.setTexture(sunTextureManager.get("map"));
-        mapSprite.setScale(scale,scale);
-        this->scale = scale;
+        mapSprite.setScale(static_cast<float>(scale),static_cast<float>(scale));
+        this->scale = static_cast<int>(scale);
         // vsync
         window.setVerticalSyncEnabled(true);
         // font/sunText handling
@@ -93,22 +93,22 @@ public:
         selectedPlantText.setPosition(20,500);
     }
 
-    void renderFrame(sf::RenderWindow& window, Grid& grid,const int sun,const int playerHp,std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>> keyCoords,std::string selectedPlant) {
+    void renderFrame(sf::RenderWindow& window, Grid& grid,const int sun,const int playerHp,const std::string& selectedPlant) {
         window.clear();
 
         // main frame
         window.draw(mapSprite);
-        for (auto& entity : grid.getEntities()) {
+        for (const auto& entity : grid.getEntities()) {
             sf::Sprite sprite;
             sprite.setTexture(sunTextureManager.get(entity->getName()));
-            float scaleFactor = sunTextureManager.getScaleFactor(entity->getName());
+            const float scaleFactor = sunTextureManager.getScaleFactor(entity->getName());
             sprite.setScale(scaleFactor, scaleFactor);
-            sf::Vector2u sunTextureSize = sprite.getTexture()->getSize();
-            float scaledWidth = sunTextureSize.x * scaleFactor;
-            float scaledHeight = sunTextureSize.y * scaleFactor;
-            int x = entity->getPosition().first;
-            int y = entity->getPosition().second;
-            sprite.setPosition(x - scaledWidth / 2.f, y - scaledHeight / 2.f);
+            const sf::Vector2u sunTextureSize = sprite.getTexture()->getSize();
+            const float scaledWidth = static_cast<float>(sunTextureSize.x) * scaleFactor;
+            const float scaledHeight = static_cast<float>(sunTextureSize.y) * scaleFactor;
+            const int x = entity->getPosition().first;
+            const int y = entity->getPosition().second;
+            sprite.setPosition(static_cast<float>(x) - scaledWidth / 2.f, static_cast<float>(y) - scaledHeight / 2.f);
             window.draw(sprite);
         }
         sunText.setString(std::to_string(sun));
@@ -122,7 +122,7 @@ public:
         window.display();
     }
 
-    unsigned int getScale() const {return scale;}
+    int getScale() const {return scale;}
 };
 
 
