@@ -23,7 +23,7 @@ runs:
         key: cache-${{ matrix.cmake_generator }}-${{ matrix.os }}-${{ matrix.cxx }}-${{ matrix.asan_name }}-${{ env.BUILD_TYPE }}-${{ env.SFML_VERSION }}
 
     # NOTE: GH Actions does not allow updating the cache yet
-    # Using the workaround found here: https://github.com/actions/cache/issues/171
+    # Using the workaround found here: @actions/cache/issues/171
     # Since this cache is small, it should not fill the cache too much
     - name: Cache Ninja deps
       uses: actions/cache@v4
@@ -64,6 +64,8 @@ runs:
       run: |
         PATH="$(pwd)/gcc/mingw64/bin:${PATH}"
         # because GH Actions does not properly prepend to $PATH and still chooses VM gcc
+        export CC=gcc
+        export CXX=g++
         export CMAKE_GENERATOR=${{ matrix.cmake_generator }}
         bash ./scripts/cmake.sh configure -s ${GITHUB_WORKSPACE} -b ${{ env.BUILD_DIR }} \
           -t ${{ env.BUILD_TYPE }} \
@@ -74,6 +76,8 @@ runs:
       shell: bash
       if: ${{ !(runner.os == 'Windows' && matrix.cxx == 'g++') }}
       run: |
+        export CC=${{ matrix.c }}
+        export CXX=${{ matrix.cxx }}
         export CMAKE_GENERATOR=${{ matrix.cmake_generator }}
         bash ./scripts/cmake.sh configure -s ${GITHUB_WORKSPACE} -b ${{ env.BUILD_DIR }} \
           -t ${{ env.BUILD_TYPE }} \
