@@ -1,5 +1,7 @@
 #include "sun.h"
 #include <cmath>
+#include <iostream>
+#include "grid.h"
 
 Sun::Sun(const int x, const int y, const int scale, const int damage, const int speed, sf::Vector2i finalPos)  : Entity(x,y,1,"sun",1,damage,scale), speed(speed), finalPos(finalPos) {}
 
@@ -22,6 +24,7 @@ void Sun::move() {
 }
 
 void Sun::update(Grid &grid) {
+    std::cout << grid.getSun();
     move();
 }
 
