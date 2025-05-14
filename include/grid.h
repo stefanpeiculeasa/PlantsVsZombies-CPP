@@ -21,9 +21,9 @@ public:
     [[nodiscard]] int getSun() const;
     [[nodiscard]] int getPlayerHp() const;
     void takeDamage(int dmg);
-    void decSun(int sun);
-    void addSun(int sun);
-    void updateCoords(const std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>> &keyCoords);
+    void decSun(int Sun);
+    void addSun(int Sun);
+    void updateCoords(const std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>> &coords);
     std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>>& getCoords();
     void handleClick(sf::Vector2i mousePos);
 

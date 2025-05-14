@@ -41,16 +41,16 @@ void Grid::takeDamage(int dmg) {
     playerHp -= dmg;
 }
 
-void Grid::decSun(int sun) {
-    this->sun -= sun;
+void Grid::decSun(const int Sun) {
+    this->sun -= Sun;
 }
 
-void Grid::addSun(int sun) {
-    this->sun += sun;
+void Grid::addSun(const int Sun) {
+    this->sun += Sun;
 }
 
-void Grid::updateCoords(const std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>> &keyCoords) {
-    this->keyCoords = keyCoords;
+void Grid::updateCoords(const std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>> &coords) {
+    this->keyCoords = coords;
 }
 
 std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>>& Grid::getCoords() {
