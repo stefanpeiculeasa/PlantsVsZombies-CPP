@@ -5,7 +5,6 @@ cmake_minimum_required(VERSION 3.26)
 set(MAIN_PROJECT_NAME "oop")
 set(MAIN_EXECUTABLE_NAME "${MAIN_PROJECT_NAME}")
 
-
 project(${MAIN_PROJECT_NAME})
 # set(CMAKE_PROJECT_VERSION_MAJOR 0)
 # set(CMAKE_PROJECT_VERSION_MINOR 0)
@@ -51,7 +50,6 @@ function(detect_libcpp)
     set(CMAKE_CXX_FLAGS ${OLD_CMAKE_CXX_FLAGS})
     unset(OLD_CMAKE_CXX_FLAGS)
 endfunction()
-
 
 function(set_custom_stdlib_and_sanitizers target add_apple_asan)
     if(MSVC)
@@ -99,6 +97,7 @@ function(set_custom_stdlib_and_sanitizers target add_apple_asan)
         endif()
     endif()
 endfunction()
+
 include(cmake/Options.cmake)
 include(cmake/CompilerFlags.cmake)
 include(cmake/CopyHelper.cmake)
@@ -107,79 +106,59 @@ include(cmake/CopyHelper.cmake)
 
 # external dependencies with FetchContent
 include(FetchContent)
-#
-# set(FETCHCONTENT_QUIET OFF)
-# set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
-#
-# NOTE: Also update env vars used for caching in
-#         - .github/actions/configure-cmake/action.yml
-#         - .github/workflows/cmake.yml
- FetchContent_Declare(
-         googletest
-         URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
- )
-#
+
+FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+
 FetchContent_MakeAvailable(googletest)
 
 ###############################################################################
 
-# external dependencies with find_package
+# External Dependencies: SFML via Git Submodule
 
-# find_package(Threads REQUIRED)
+# Optionally, set SFML_STATIC_LIBRARIES to TRUE if you want to statically link SFML
+# set(SFML_STATIC_LIBRARIES TRUE)
 
-find_package(SFML 2.6 COMPONENTS system window graphics audio REQUIRED)
-
+# Add SFML as a subdirectory to build it from source
+add_subdirectory(external/SFML)
 
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
+
+# Create the executable from your source files
 add_executable(${MAIN_EXECUTABLE_NAME} main.cpp ${SOURCES})
 
-target_link_libraries(${MAIN_EXECUTABLE_NAME} sfml-system sfml-window sfml-graphics sfml-audio)
-
+# Link SFML libraries (system, window, graphics, audio)
+target_link_libraries(${MAIN_EXECUTABLE_NAME}
+        sfml-system
+        sfml-window
+        sfml-graphics
+        sfml-audio
+)
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
 # NOTE: RUN_SANITIZERS is optional, if it's not present it will default to true
 set_compiler_flags(RUN_SANITIZERS TRUE TARGET_NAMES ${MAIN_EXECUTABLE_NAME})
-# set_compiler_flags(TARGET_NAMES ${MAIN_EXECUTABLE_NAME} ${FOO} ${BAR})
-# where ${FOO} and ${BAR} represent additional executables or libraries
-# you want to compile with the set compiler flags
 
 ###############################################################################
 
-# use SYSTEM so cppcheck and clang-tidy do not report warnings from these directories
+# Use SYSTEM so cppcheck and clang-tidy do not report warnings from these directories
 target_include_directories(${MAIN_EXECUTABLE_NAME} SYSTEM PRIVATE generated/include)
-# target_include_directories(${MAIN_EXECUTABLE_NAME} SYSTEM PRIVATE ext/<SomeHppLib>/include)
-# target_include_directories(${MAIN_EXECUTABLE_NAME} SYSTEM PRIVATE ${<SomeLib>_SOURCE_DIR}/include)
-# target_link_directories(${MAIN_EXECUTABLE_NAME} PRIVATE ${<SomeLib>_BINARY_DIR}/lib)
-# target_link_libraries(${MAIN_EXECUTABLE_NAME} <SomeLib>)
 
-###############################################################################
-
-# copy binaries to "bin" folder; these are uploaded as artifacts on each release
-# DESTINATION_DIR is set as "bin" in cmake/Options.cmake:6
+# Copy binaries to "bin" folder; these are uploaded as artifacts on each release
 install(TARGETS ${MAIN_EXECUTABLE_NAME} DESTINATION ${DESTINATION_DIR})
 if(APPLE)
     install(FILES launcher.command DESTINATION ${DESTINATION_DIR})
 endif()
 
 ###############################################################################
-#enable_testing()
-#
-#add_executable(
-#        test_oop
-#        ${HEADERS}
-#        ${TESTS}
-#        ${SOURCES}
-#)
-#
-#target_link_libraries(
-#        test_oop
-#        GTest::gtest_main
-#)
-#
-#include(GoogleTest)
-#gtest_discover_tests(test_oop)
+
+# Copy any additional necessary files
 copy_files(FILES tastatura.txt COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
+
+# Uncomment below if you need additional copy functionality
 # copy_files(FILES tastatura.txt config.json DIRECTORY images sounds COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
 # copy_files(DIRECTORY images sounds COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
