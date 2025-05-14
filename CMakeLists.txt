@@ -99,7 +99,6 @@ function(set_custom_stdlib_and_sanitizers target add_apple_asan)
 endfunction()
 
 include(cmake/Options.cmake)
-include(cmake/CompilerFlags.cmake)
 include(cmake/CopyHelper.cmake)
 
 ###############################################################################
@@ -139,6 +138,8 @@ add_executable(${MAIN_EXECUTABLE_NAME} main.cpp ${SOURCES})
 
 # Link SFML libraries (system, window, graphics, audio)
 target_link_libraries(${MAIN_EXECUTABLE_NAME} sfml-system sfml-window sfml-graphics sfml-audio)
+
+include(cmake/CompilerFlags.cmake)
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
 # NOTE: RUN_SANITIZERS is optional, if it's not present it will default to true
