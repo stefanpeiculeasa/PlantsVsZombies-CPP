@@ -29,7 +29,7 @@ public:
 
     virtual void update(Grid& grid) = 0;
 
-    virtual void takeDamage(int damage);
+    virtual void takeDamage(int dmg);
 
     [[nodiscard]] std::string getName();
     [[nodiscard]] bool getDeletionMark() const;
@@ -37,8 +37,8 @@ public:
     [[nodiscard]] sf::RectangleShape& getHitbox();
     [[nodiscard]] int getDamage() const;
 
-    void setCanMove(bool canMove);
-    void setDeletionMark(bool deletionMark);
+    void setCanMove(bool canmove);
+    void setDeletionMark(bool mark);
 
     virtual void die() {}
 

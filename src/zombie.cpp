@@ -30,7 +30,7 @@ void Zombie::update(Grid &grid) {
 
     if (const auto& coords = grid.getCoords(); coords.contains("zombieHit")) {
         for (const auto& coord : coords.at("zombieHit")) {
-            if (sf::FloatRect hitbox = this->getHitbox().getGlobalBounds(); hitbox.contains(static_cast<sf::Vector2f>(coord.first))) {
+            if (sf::FloatRect hitBox = this->getHitbox().getGlobalBounds(); hitBox.contains(static_cast<sf::Vector2f>(coord.first))) {
                 grid.takeDamage(this->getDamage());
                 this->setDeletionMark(true);
             }
@@ -40,8 +40,8 @@ void Zombie::update(Grid &grid) {
 
     for (auto& entity : grid.getEntities()) {
         if (dynamic_cast<Plant*>(entity.get())) {
-            sf::FloatRect hitbox = this->getHitbox().getGlobalBounds();
-            if (hitbox.contains(entity->getHitbox().getPosition())) {
+            sf::FloatRect Hitbox = this->getHitbox().getGlobalBounds();
+            if (Hitbox.contains(entity->getHitbox().getPosition())) {
                 this->setCanMove(false);
                 attack(entity);
             }

@@ -8,19 +8,19 @@ Entity::Entity(int x, int y, int health, std::string name, int ticks, int damage
     }
 
 
-void Entity::takeDamage(const int damage) {
-    health -= damage;
+void Entity::takeDamage(const int dmg) {
+    health -= dmg;
     if (health <= 0) {
         setDeletionMark(true);
     }
 }
 
-void Entity::setCanMove(const bool canMove) {
-    this->canMove = canMove;
+void Entity::setCanMove(const bool canmove) {
+    this->canMove = canmove;
 }
 
-void Entity::setDeletionMark(const bool deletionMark) {
-    this->deletionMark = deletionMark;
+void Entity::setDeletionMark(const bool mark) {
+    this->deletionMark = mark;
 }
 
 std::string Entity::getName() {

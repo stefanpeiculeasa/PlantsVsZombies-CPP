@@ -62,13 +62,13 @@ public:
         const unsigned int screenHeight = sf::VideoMode::getDesktopMode().height;
         const unsigned int maxScaleX = screenWidth / mapWidth;
         const unsigned int maxScaleY = screenHeight / mapHeight;
-        unsigned int scale = std::min(maxScaleX, maxScaleY);
-        const unsigned int windowWidth = mapWidth * scale;
-        const unsigned int windowHeight = mapHeight * scale;
-        window.create(sf::VideoMode(windowWidth,windowHeight),"Plants vs Victor",sf::Style::Close);
+        const unsigned int Scale = std::min(maxScaleX, maxScaleY);
+        const unsigned int windowWidth = mapWidth * Scale;
+        const unsigned int windowHeight = mapHeight * Scale;
+        window.create(sf::VideoMode(windowWidth,windowHeight),  "Plants vs Victor",sf::Style::Close);
         mapSprite.setTexture(sunTextureManager.get("map"));
-        mapSprite.setScale(static_cast<float>(scale),static_cast<float>(scale));
-        this->scale = static_cast<int>(scale);
+        mapSprite.setScale(static_cast<float>(Scale),static_cast<float>(Scale));
+        this->scale = static_cast<int>(Scale);
         // vsync
         window.setVerticalSyncEnabled(true);
         // font/sunText handling

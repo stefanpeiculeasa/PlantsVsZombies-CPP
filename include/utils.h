@@ -31,8 +31,8 @@ namespace GameUtils {
         }}
     };
 
-    inline void updateCoords(std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>>& keyCoords,const int scale) {
-        for (auto& key : keyCoords) {
+    inline void updateCoords(std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>>& coords,const int scale) {
+        for (auto& key : coords) {
             for (auto& coord : key.second) {
                 coord.first.x *= scale;
                 coord.first.y *= scale;
