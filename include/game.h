@@ -62,7 +62,8 @@ public:
                                         auto plant = std::make_unique<Wallnut>(center.first.x,center.first.y,renderer.getScale());
                                         grid.addEntity(std::move(plant));
                                     } else if (selectedPlant == "sunflower") {
-                                        grid.addEntity(std::move(std::make_unique<Sunflower>(center.first.x,center.first.y,renderer.getScale())));
+                                        auto plant = std::make_unique<Sunflower>(center.first.x,center.first.y,renderer.getScale());
+                                        grid.addEntity(std::move(plant));
                                     }
                                 }
                                 else
@@ -96,7 +97,7 @@ public:
                 }
 
             }
-            grid.update(keyCoords);
+            grid.update();
             renderer.renderFrame(window,grid,grid.getSun(),grid.getPlayerHp(),selectedPlant);
         }
     }

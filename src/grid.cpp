@@ -8,10 +8,10 @@ void Grid::addEntity(std::unique_ptr<Entity> entity) {
         }
         else return;
     }
-    toAdd.push_back(move(entity));
+    toAdd.push_back(std::move(entity));
 }
 
-void Grid::update(std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>> &keyCoords) {
+void Grid::update() {
     for (auto it = entities.begin(); it != entities.end();) {
         
         (*it)->update(*this);

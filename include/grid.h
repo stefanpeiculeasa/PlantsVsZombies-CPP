@@ -15,7 +15,7 @@ class Grid {
 public:
     void addEntity(std::unique_ptr<Entity> entity);
 
-    void update(std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>>& keyCoords);
+    void update();
 
     std::vector<std::unique_ptr<Entity>>& getEntities();
     [[nodiscard]] int getSun() const;
