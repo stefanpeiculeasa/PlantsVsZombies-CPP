@@ -112,7 +112,13 @@ FetchContent_Declare(
         URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
 )
 
-FetchContent_MakeAvailable(googletest)
+FetchContent_Declare(
+        sfml
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG 2.6.1
+)
+
+FetchContent_MakeAvailable(googletest sfml)
 
 ###############################################################################
 
@@ -122,7 +128,7 @@ FetchContent_MakeAvailable(googletest)
 # set(SFML_STATIC_LIBRARIES TRUE)
 
 # Add SFML as a subdirectory to build it from source
-add_subdirectory(external/SFML)
+# add_subdirectory(external/SFML)
 
 ###############################################################################
 
@@ -132,12 +138,7 @@ add_subdirectory(external/SFML)
 add_executable(${MAIN_EXECUTABLE_NAME} main.cpp ${SOURCES})
 
 # Link SFML libraries (system, window, graphics, audio)
-target_link_libraries(${MAIN_EXECUTABLE_NAME}
-        sfml-system
-        sfml-window
-        sfml-graphics
-        sfml-audio
-)
+target_link_libraries(${MAIN_EXECUTABLE_NAME} sfml-system sfml-window sfml-graphics sfml-audio)
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
 # NOTE: RUN_SANITIZERS is optional, if it's not present it will default to true
