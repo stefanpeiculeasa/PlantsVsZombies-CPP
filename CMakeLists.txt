@@ -14,6 +14,11 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    add_compile_options(-D_DARWIN_C_SOURCE -Wno-attributes)
+    add_definitions(-DAPI_AVAILABLE\(...\)= -DAPI_UNAVAILABLE\(...\)=)
+endif()
+
 # You aren't supposed to be using this, but convenience...
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/*")
 file(GLOB_RECURSE HEADERS RELATIVE ${CMAKE_SOURCE_DIR} "include/*")
