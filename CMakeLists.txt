@@ -14,21 +14,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    add_compile_options(
-        -include ${CMAKE_SOURCE_DIR}/include/gcc_fix.h
-        -D_DARWIN_C_SOURCE
-        -Wno-attributes
-        -Wno-ignored-attributes
-        # Add libdispatch support
-        -ldispatch
-    )
-    
-    # For GCC 13+ on macOS
-    if(APPLE)
-        target_link_libraries(${MAIN_EXECUTABLE_NAME} PRIVATE dispatch)
-    endif()
-endif()
+
 
 # You aren't supposed to be using this, but convenience...
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/*")
@@ -152,6 +138,22 @@ FetchContent_MakeAvailable(googletest sfml)
 # Create the executable from your source files
 add_executable(${MAIN_EXECUTABLE_NAME} main.cpp ${SOURCES}
         src/sunflower.cpp)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    add_compile_options(
+        -include ${CMAKE_SOURCE_DIR}/include/gcc_fix.h
+        -D_DARWIN_C_SOURCE
+        -Wno-attributes
+        -Wno-ignored-attributes
+        # Add libdispatch support
+        -ldispatch
+    )
+    
+    # For GCC 13+ on macOS
+    if(APPLE)
+        target_link_libraries(${MAIN_EXECUTABLE_NAME} PRIVATE dispatch)
+    endif()
+endif()
 
 # Link SFML libraries (system, window, graphics, audio)
 target_link_libraries(${MAIN_EXECUTABLE_NAME} sfml-system sfml-window sfml-graphics sfml-audio)
