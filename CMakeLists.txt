@@ -139,19 +139,22 @@ FetchContent_MakeAvailable(googletest sfml)
 add_executable(${MAIN_EXECUTABLE_NAME} main.cpp ${SOURCES}
         src/sunflower.cpp)
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    # Add fix header to all targets
+    add_compile_options(-include ${CMAKE_SOURCE_DIR}/include/gcc_fix.h)
+    
+    # Required flags for macOS SDK compatibility
     add_compile_options(
-        -include ${CMAKE_SOURCE_DIR}/include/gcc_fix.h
         -D_DARWIN_C_SOURCE
         -Wno-attributes
         -Wno-ignored-attributes
-        # Add libdispatch support
-        -ldispatch
+        -Wno-deprecated-declarations
     )
-
-    # For GCC 13+ on macOS
+    
+    # Link GCD for all targets
     if(APPLE)
-        target_link_libraries(${MAIN_EXECUTABLE_NAME} PRIVATE dispatch)
+        link_libraries(dispatch)
+        add_link_options(-ldispatch)
     endif()
 endif()
 
