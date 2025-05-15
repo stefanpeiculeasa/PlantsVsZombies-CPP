@@ -151,7 +151,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     
     # For GCC 13+ on macOS
     if(APPLE)
-        target_link_libraries(${MAIN_EXECUTABLE_NAME} PRIVATE dispatch)
+        target_link_libraries(${MAIN_EXECUTABLE_NAME} PUBLIC dispatch)
     endif()
 endif()
 
