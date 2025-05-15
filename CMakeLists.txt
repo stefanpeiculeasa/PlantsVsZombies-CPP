@@ -15,12 +15,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    # Include GCC fix header before all other includes
+    add_compile_options(-include ${CMAKE_SOURCE_DIR}/include/gcc_fix.h)
+    
+    # Additional flags
     add_compile_options(
-        -D_DARWIN_C_SOURCE 
+        -D_DARWIN_C_SOURCE
         -Wno-attributes
-        # Escape parentheses and quotes properly
-        "-DAPI_AVAILABLE(...)=" 
-        "-DAPI_UNAVAILABLE(...)="
+        -Wno-ignored-attributes
     )
 endif()
 
