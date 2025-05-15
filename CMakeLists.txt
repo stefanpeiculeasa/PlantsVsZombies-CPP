@@ -148,17 +148,20 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
         # Add libdispatch support
         -ldispatch
     )
-    
+
     # For GCC 13+ on macOS
     if(APPLE)
-        target_link_libraries(${MAIN_EXECUTABLE_NAME} PUBLIC dispatch)
+        target_link_libraries(${MAIN_EXECUTABLE_NAME} PRIVATE dispatch)
     endif()
 endif()
 
-# Link SFML libraries (system, window, graphics, audio)
-target_link_libraries(${MAIN_EXECUTABLE_NAME} sfml-system sfml-window sfml-graphics sfml-audio)
+# Link SFML libraries using keyword form
+target_link_libraries(${MAIN_EXECUTABLE_NAME}
+    PRIVATE sfml-system sfml-window sfml-graphics sfml-audio
+)
 
 include(cmake/CompilerFlags.cmake)
+
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
 # NOTE: RUN_SANITIZERS is optional, if it's not present it will default to true
