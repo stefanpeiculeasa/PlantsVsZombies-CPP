@@ -15,8 +15,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    add_compile_options(-D_DARWIN_C_SOURCE -Wno-attributes)
-    add_definitions(-DAPI_AVAILABLE\(...\)= -DAPI_UNAVAILABLE\(...\)=)
+    add_compile_options(
+        -D_DARWIN_C_SOURCE 
+        -Wno-attributes
+        # Escape parentheses and quotes properly
+        "-DAPI_AVAILABLE(...)=" 
+        "-DAPI_UNAVAILABLE(...)="
+    )
 endif()
 
 # You aren't supposed to be using this, but convenience...
