@@ -1,12 +1,6 @@
-# Nu primesc notă pentru că nu am pus titlu și descriere
+# Plants vs. Zombies
 
-### Folosiți template-ul corespunzător grupei voastre!
-
-| Laborant  | Link template                                |
-|-----------|----------------------------------------------|
-| Dragoș B  | https://github.com/Ionnier/oop-template      |
-| Tiberiu M | https://github.com/MaximTiberiu/oop-template |
-| Marius MC | https://github.com/mcmarius/oop-template     |
+A basic remake of the classic Plants vs. Zombies game, built in C++ using simple graphics and object-oriented programming. This version includes core gameplay elements like planting defensive units, spawning waves of enemies, and managing resources. 
 
 ## Instrucțiuni de compilare
 
