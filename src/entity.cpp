@@ -7,7 +7,7 @@ Entity::Entity(int x, int y, int health, std::string name, int ticks, int damage
     hitbox.setPosition(static_cast<float>(x),static_cast<float>(y));
     }
 
-Entity::Entity(const Entity &other) : x(other.x), y(other.y), name(other.name), hitbox(other.hitbox) {}
+Entity::Entity(const Entity &other) : x(other.x), y(other.y),health(other.health), ticks(other.ticks), maxTicks(ticks), damage(other.damage), name(other.name), hitbox(other.hitbox) {}
 
 Entity& Entity::operator=(const Entity& other) {
     if (this != &other) {

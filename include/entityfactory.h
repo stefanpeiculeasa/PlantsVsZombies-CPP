@@ -1,7 +1,7 @@
 #ifndef ENTITYFACTORY_H
 #define ENTITYFACTORY_H
 
-#include "memory"
+#include <memory>
 #include "entity.h"
 
 class EntityFactory {
