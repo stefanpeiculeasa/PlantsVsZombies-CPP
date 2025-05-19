@@ -32,10 +32,10 @@ std::ostream& operator<<(std::ostream& os, const Entity& Entity) {
     return os;
 }
 
-std::istream& operator>>(std::istream& is, Entity& Entity) {
-    is >> Entity.name;
-    return is;
-}
+// std::istream& operator>>(std::istream& is, Entity& Entity) {
+//     is >> Entity.name;
+//     return is;
+// }
 
 void Entity::takeDamage(const int dmg) {
     health -= dmg;
