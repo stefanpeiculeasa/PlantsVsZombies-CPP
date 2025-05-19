@@ -92,8 +92,6 @@ public:
         selectedPlantText.setStyle(sf::Text::Bold);
         selectedPlantText.setPosition(20,500);
 
-        remainingZombies.setString("Remaining: \n 217");
-
         remainingZombies.setFont(font);
         remainingZombies.setCharacterSize(70);
         remainingZombies.setFillColor(sf::Color(78, 57, 212));
@@ -101,7 +99,7 @@ public:
         remainingZombies.setPosition(20,250);
     }
 
-    void renderFrame(sf::RenderWindow& window, Grid& grid, const int sun, const int playerHp, const std::string& selectedPlant) {
+    void renderFrame(sf::RenderWindow& window, Grid& grid, const int sun, const int playerHp, const std::string& selectedPlant, const int remZombies) {
         window.clear();
 
         window.draw(mapSprite);
@@ -142,6 +140,8 @@ public:
         sunText.setString(std::to_string(sun));
         hpText.setString(std::to_string(playerHp));
         selectedPlantText.setString("Selected: \n" + selectedPlant);
+        remainingZombies.setString("Remaining: \n" + std::to_string(remZombies));
+
 
         window.draw(hpText);
         window.draw(sunText);

@@ -12,7 +12,7 @@ class Game {
     bool running = true;
     sf::RenderWindow window;
     sf::Clock clock;
-    std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>> keyCoords = GameUtils::keyCoords;
+    std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>> keyCoords = Settings::keyCoords;
 
 public:
     Game(const Game&) = delete;
@@ -50,12 +50,13 @@ public:
                         break;
                 }
 
-                if (const sf::Time sleep = GameUtils::frameTime - clock.getElapsedTime(); sleep > sf::Time::Zero) {
+                if (const sf::Time sleep = Settings::frameTime - clock.getElapsedTime(); sleep > sf::Time::Zero) {
                     sf::sleep(sleep);
                 }
             }
+            if (grid.getPlayerHp() <= 0) window.close();
             grid.update();
-            renderer.renderFrame(window, grid, grid.getSun(), grid.getPlayerHp(), grid.getSelectedPlant());
+            renderer.renderFrame(window, grid, grid.getSun(), grid.getPlayerHp(), grid.getSelectedPlant(),grid.getZombiesAmount());
             clock.restart();
         }
     }

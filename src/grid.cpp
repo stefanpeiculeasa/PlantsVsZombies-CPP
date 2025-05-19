@@ -1,8 +1,6 @@
 #include "grid.h"
 #include "plant.h"
 #include "sun.h"
-// #include "wallnut.h"
-// #include "sunflower.h"
 #include "entityfactory.h"
 
 void Grid::addEntity(std::unique_ptr<Entity> entity) {
@@ -16,6 +14,16 @@ void Grid::addEntity(std::unique_ptr<Entity> entity) {
 }
 
 void Grid::update() {
+    zombieSpawnTicks -= 1;
+    if (zombieSpawnTicks == 0) {
+        entities.push_back(EntityFactory::createEntity(EntityFactory::EntityType::BasicZombie,1500,Settings::rows[Settings::random(0,Settings::rows.size()-1)]));
+        zombiesAmount -= 1;
+        if (zombiesAmount == 0) {
+            zombieSpawnTicks = -1;
+        }
+        else zombieSpawnTicks = Settings::random(Settings::spawnInterval.first * Settings::fps, Settings::spawnInterval.second * Settings::fps);
+    }
+
     for (auto it = entities.begin(); it != entities.end();) {
         
         (*it)->update(*this);
@@ -47,6 +55,11 @@ int Grid::getSun() const {
 int Grid::getPlayerHp() const {
     return playerHp;
 }
+
+int Grid::getZombiesAmount() const {
+    return zombiesAmount;
+}
+
 
 std::string Grid::getSelectedPlant() const {
     return selectedPlant;
@@ -88,7 +101,7 @@ void Grid::handleClick(const sf::Vector2f mousePos) {
 
             if (clickBox.contains(mousePos)) {
                 entity->setDeletionMark(true);
-                addSun(5);
+                addSun(Settings::sunValue);
                 break;
             }
         }
@@ -102,7 +115,7 @@ void Grid::handleClick(const sf::Vector2f mousePos) {
             if (selectedPlant == "peashooter") {
                 addEntity(EntityFactory::createEntity(EntityFactory::EntityType::Peashooter,center.first.x,center.first.y));
             } else if (selectedPlant == "wallnut") {
-                addEntity(EntityFactory::createEntity(EntityFactory::EntityType::BasicZombie,center.first.x,center.first.y));
+                addEntity(EntityFactory::createEntity(EntityFactory::EntityType::Wallnut,center.first.x,center.first.y));
             } else if (selectedPlant == "sunflower") {
                 addEntity(EntityFactory::createEntity(EntityFactory::EntityType::Sunflower,center.first.x,center.first.y));
             } else break;
