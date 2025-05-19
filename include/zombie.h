@@ -9,7 +9,7 @@ protected:
     int speed;
 
 public:
-    Zombie(int x,int y,int health,int speed, std::string name,int ticks,int damage,int scale);
+    Zombie(int x,int y,int health,int speed, std::string name,int ticks,int damage);
 
     void moveForward();
 

@@ -1,5 +1,9 @@
 #include "grid.h"
 #include "plant.h"
+#include "sun.h"
+// #include "wallnut.h"
+// #include "sunflower.h"
+#include "entityfactory.h"
 
 void Grid::addEntity(std::unique_ptr<Entity> entity) {
     if (const auto* pPtr = dynamic_cast<Plant*>(entity.get())) {
@@ -17,6 +21,13 @@ void Grid::update() {
         (*it)->update(*this);
 
         if ((*it)->getDeletionMark()) {
+            if (dynamic_cast<Plant*>(it->get())) {
+                for (auto& center : keyCoords["tileCenters"]) {
+                    if (center.first.x == (*it)->getPosition().first && center.first.y == (*it)->getPosition().second) {
+                        center.second = false;
+                    }
+                }
+            }
             it = entities.erase(it);
         } else ++it;
     }
@@ -37,7 +48,11 @@ int Grid::getPlayerHp() const {
     return playerHp;
 }
 
-void Grid::takeDamage(int dmg) {
+std::string Grid::getSelectedPlant() const {
+    return selectedPlant;
+}
+
+void Grid::takeDamage(const int dmg) {
     playerHp -= dmg;
 }
 
@@ -57,6 +72,57 @@ std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>>& Gri
     return keyCoords;
 }
 
-// void Grid::handleClick(sf::Vector2i mousePos) {
-//
-// }
+void Grid::handleClick(const sf::Vector2f mousePos) {
+    const float clickBoxSize = static_cast<float>(keyCoords["hitboxSize"][0].first.x);
+    // sun check
+    for (auto& entity : entities) {
+        if (dynamic_cast<Sun*>(entity.get())) {
+            const sf::Vector2f sunPos = entity->getHitbox().getPosition();
+
+            sf::FloatRect clickBox(
+                sunPos.x - clickBoxSize / 2.f,
+                sunPos.y - clickBoxSize / 2.f,
+                clickBoxSize,
+                clickBoxSize
+            );
+
+            if (clickBox.contains(mousePos)) {
+                entity->setDeletionMark(true);
+                addSun(5);
+                break;
+            }
+        }
+    }
+
+    for (auto& center : keyCoords["tileCenters"]) {
+        const sf::Vector2f scaledCenter(static_cast<float>(center.first.x), static_cast<float>(center.first.y));
+
+        if (sf::FloatRect clickBox(scaledCenter.x - clickBoxSize / 2,scaledCenter.y - clickBoxSize / 2,clickBoxSize,clickBoxSize); clickBox.contains(mousePos)) {
+            if (center.second) break;
+            if (selectedPlant == "peashooter") {
+                addEntity(EntityFactory::createEntity(EntityFactory::EntityType::Peashooter,center.first.x,center.first.y));
+            } else if (selectedPlant == "wallnut") {
+                addEntity(EntityFactory::createEntity(EntityFactory::EntityType::BasicZombie,center.first.x,center.first.y));
+            } else if (selectedPlant == "sunflower") {
+                addEntity(EntityFactory::createEntity(EntityFactory::EntityType::Sunflower,center.first.x,center.first.y));
+            } else break;
+            center.second = true;
+            break;
+        }
+    }
+}
+
+void Grid::handleKeyPress(const sf::Keyboard::Key Key) {
+    switch (Key) {
+        case sf::Keyboard::Num1:
+            selectedPlant = "peashooter";
+            break;
+        case sf::Keyboard::Num2:
+            selectedPlant = "wallnut";
+            break;
+        case sf::Keyboard::Num3:
+            selectedPlant = "sunflower";
+            break;
+        default: break;
+    }
+}

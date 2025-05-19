@@ -3,9 +3,9 @@
 
 #include "zombie.h"
 
-class BasicZombie : public Zombie {
+class BasicZombie final : public Zombie {
 public:
-    BasicZombie(int x,int y,int scale);
+    BasicZombie(int x,int y);
 };
 
 

@@ -9,6 +9,7 @@
 #include <vector>
 #include <memory>
 #include <SFML/Graphics.hpp>
+// #include "stat.h"
 
 class Grid;
 
@@ -25,7 +26,14 @@ protected:
     std::vector<std::unique_ptr<Entity>> childEntities;
     sf::RectangleShape hitbox;
 public:
-    Entity(int x,int y,int health,std::string name,int ticks,int damage,int scale);
+    Entity(int x,int y,int health,std::string name,int ticks,int damage);
+
+    Entity(const Entity& other);
+
+    Entity& operator=(const Entity& other);
+
+    friend std::ostream& operator<<(std::ostream& os, const Entity& Entity);
+    friend std::istream& operator>>(std::istream& is, Entity& Entity);
 
     virtual void update(Grid& grid) = 0;
 

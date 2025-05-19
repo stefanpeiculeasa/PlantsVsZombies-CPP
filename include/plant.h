@@ -8,7 +8,7 @@ protected:
     int cost;
 
 public:
-    Plant(int x, int y,int health,int cost, std::string name,int ticks,int damage,int scale);
+    Plant(int x, int y,int health,int cost, std::string name,int ticks,int damage);
 
     virtual void attack(Grid& grid) = 0;
 

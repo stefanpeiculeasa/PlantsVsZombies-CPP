@@ -1,9 +1,8 @@
 #include "sun.h"
 #include <cmath>
-#include <iostream>
 #include "grid.h"
 
-Sun::Sun(const int x, const int y, const int scale, const int damage, const int speed, sf::Vector2i finalPos)  : Entity(x,y,1,"sun",1,damage,scale), speed(speed), finalPos(finalPos) {}
+Sun::Sun(const int x, const int y, const int damage, const int speed, const sf::Vector2i finalPos)  : Entity(x,y,1,"sun",1,damage), speed(speed), finalPos(finalPos) {}
 
 void Sun::move() {
     auto dx = static_cast<float>(finalPos.x - x);
@@ -23,8 +22,7 @@ void Sun::move() {
     hitbox.setPosition(static_cast<float>(x),static_cast<float>(y));
 }
 
-void Sun::update(Grid &grid) {
-    std::cout << grid.getSun();
+void Sun::update(Grid&) {
     move();
 }
 

@@ -2,12 +2,11 @@
 #define SUNFLOWER_H
 
 #include "plant.h"
-#include <random>
 
 
 class Sunflower final : public Plant {
 public:
-    Sunflower(const int x,const int y,const int scale) : Plant(x, y, 100, 5, "sunflower",600,0,scale) {}
+    Sunflower(int x, int y);
 
     void attack(Grid& grid) override;
 

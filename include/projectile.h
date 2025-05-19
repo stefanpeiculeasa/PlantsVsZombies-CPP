@@ -3,12 +3,11 @@
 
 #include "entity.h"
 #include "zombie.h"
-#include "utils.h"
 
 class Projectile final : public Entity{
     int speed;
 public:
-    Projectile(const int x,const int y,const int scale,const int damage,const int speed) : Entity(x,y,1,"projectile",1,damage,scale), speed(speed) {}
+    Projectile(const int x,const int y,const int damage,const int speed) : Entity(x,y,1,"projectile",1,damage), speed(speed) {}
 
     void move() {
         x+=speed;

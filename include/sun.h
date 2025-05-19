@@ -8,7 +8,7 @@ class Sun final : public Entity{
     int speed;
     sf::Vector2i finalPos;
 public:
-    Sun(int x,int y,int scale,int damage,int speed,sf::Vector2i finalPos);
+    Sun(int x,int y,int damage,int speed,sf::Vector2i finalPos);
 
     void move();
 

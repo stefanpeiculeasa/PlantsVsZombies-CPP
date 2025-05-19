@@ -135,7 +135,13 @@ FetchContent_MakeAvailable(googletest sfml)
 
 # Create the executable from your source files
 add_executable(${MAIN_EXECUTABLE_NAME} main.cpp ${SOURCES}
-        src/sunflower.cpp)
+        src/sunflower.cpp
+        include/entityfactory.h
+        src/entityfactory.cpp
+        src/peashooter.cpp
+        src/wallnut.cpp
+        include/stat.h
+)
 
 # Link SFML libraries (system, window, graphics, audio)
 target_link_libraries(${MAIN_EXECUTABLE_NAME} sfml-system sfml-window sfml-graphics sfml-audio)

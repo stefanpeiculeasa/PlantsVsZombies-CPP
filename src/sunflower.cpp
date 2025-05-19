@@ -1,6 +1,9 @@
 #include "sunflower.h"
 #include "sun.h"
 #include "grid.h"
+#include "random"
+
+Sunflower::Sunflower(const int x,const int y) : Plant(x, y, 100, 5, "sunflower",600,0) {}
 
 void Sunflower::attack(Grid &grid) {
     static std::random_device rd;
@@ -11,6 +14,6 @@ void Sunflower::attack(Grid &grid) {
     int suny = dist(gen);
     auto finalPos = sf::Vector2i(sunx + x, suny + y);
 
-    auto sun = std::make_unique<Sun>(x, y, 2, 0, 1, finalPos);
+    auto sun = std::make_unique<Sun>(x, y, 0, 1, finalPos);
     grid.addEntity(std::move(sun));
 }
