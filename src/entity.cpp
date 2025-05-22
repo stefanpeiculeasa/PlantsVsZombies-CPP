@@ -3,7 +3,7 @@
 #include <utility>
 #include "utils.h"
 
-Entity::Entity(int x, int y, int health, std::string name, int ticks, int damage) : x(),y(),health(),maxTicks(),ticks(),damage() {
+Entity::Entity(int x, int y, int health, std::string name, int ticks, int damage) : x(),y(),health(),ticks(),maxTicks(),damage() {
     this->x.set(x);
     this->y.set(y);
     this->health.set(health);
