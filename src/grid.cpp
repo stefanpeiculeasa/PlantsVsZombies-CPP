@@ -1,7 +1,11 @@
 #include "grid.h"
+
+#include <iostream>
+
 #include "plant.h"
 #include "sun.h"
 #include "entityfactory.h"
+#include "exceptions.h"
 
 void Grid::addEntity(std::unique_ptr<Entity> entity) {
     if (const auto* pPtr = dynamic_cast<Plant*>(entity.get())) {
@@ -16,7 +20,7 @@ void Grid::addEntity(std::unique_ptr<Entity> entity) {
 void Grid::update() {
     zombieSpawnTicks -= 1;
     if (zombieSpawnTicks == 0) {
-        entities.push_back(EntityFactory::createEntity(EntityFactory::EntityType::BasicZombie,1500,Settings::rows[Settings::random(0,Settings::rows.size()-1)]));
+        entities.push_back(EntityFactory::createEntity(EntityFactory::EntityType::BasicZombie,1500,Settings::rows[Settings::random(0,static_cast<int>(Settings::rows.size()-1))]));
         zombiesAmount -= 1;
         if (zombiesAmount == 0) {
             zombieSpawnTicks = -1;
@@ -86,6 +90,7 @@ std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>>& Gri
 }
 
 void Grid::handleClick(const sf::Vector2f mousePos) {
+    bool clicked = false;
     const float clickBoxSize = static_cast<float>(keyCoords["hitboxSize"][0].first.x);
     // sun check
     for (auto& entity : entities) {
@@ -102,6 +107,7 @@ void Grid::handleClick(const sf::Vector2f mousePos) {
             if (clickBox.contains(mousePos)) {
                 entity->setDeletionMark(true);
                 addSun(Settings::sunValue);
+                clicked = true;
                 break;
             }
         }
@@ -112,6 +118,7 @@ void Grid::handleClick(const sf::Vector2f mousePos) {
 
         if (sf::FloatRect clickBox(scaledCenter.x - clickBoxSize / 2,scaledCenter.y - clickBoxSize / 2,clickBoxSize,clickBoxSize); clickBox.contains(mousePos)) {
             if (center.second) break;
+            clicked = true;
             if (selectedPlant == "peashooter") {
                 addEntity(EntityFactory::createEntity(EntityFactory::EntityType::Peashooter,center.first.x,center.first.y));
             } else if (selectedPlant == "wallnut") {
@@ -122,6 +129,13 @@ void Grid::handleClick(const sf::Vector2f mousePos) {
             center.second = true;
             break;
         }
+    }
+    try {
+        if (!clicked) {
+            throw InvalidClickPosition();
+        }
+    } catch (const InvalidClickPosition& e) {
+        std::cout << e.what() << std::endl;
     }
 }
 

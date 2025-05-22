@@ -5,7 +5,9 @@ template<typename T>
 class Stat {
     T stat;
 public:
-    explicit Stat(const T x) : stat(x) {}
+    Stat() = default;
+
+    Stat(const T x) : stat(x) {}
 
     T get() const {return stat;}
 

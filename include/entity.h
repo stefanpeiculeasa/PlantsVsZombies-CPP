@@ -9,20 +9,20 @@
 #include <vector>
 #include <memory>
 #include <SFML/Graphics.hpp>
-// #include "stat.h"
+#include "stat.h"
 
 class Grid;
 
 class Entity {
 protected:
-    int x, y;
-    int health;
-    int ticks;
-    int maxTicks;
-    int damage;
-    bool deletionMark = false;
-    bool canMove = true;
-    std::string name;
+    Stat<int> x, y;
+    Stat<int> health;
+    Stat<int> ticks;
+    Stat<int> maxTicks;
+    Stat<int> damage;
+    Stat<bool> deletionMark = false;
+    Stat<bool> canMove = true;
+    Stat<std::string> name;
     std::vector<std::unique_ptr<Entity>> childEntities;
     sf::RectangleShape hitbox;
 public:

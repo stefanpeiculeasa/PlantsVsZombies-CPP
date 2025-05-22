@@ -10,8 +10,8 @@ public:
     Projectile(const int x,const int y,const int damage,const int speed) : Entity(x,y,1,"projectile",1,damage), speed(speed) {}
 
     void move() {
-        x+=speed;
-        hitbox.setPosition(static_cast<float>(x),static_cast<float>(y));
+        x.modify(speed);
+        hitbox.setPosition(static_cast<float>(x.get()),static_cast<float>(y.get()));
     }
 
     void update(Grid& grid) override {
@@ -20,7 +20,7 @@ public:
             if (dynamic_cast<Zombie*>(entity.get())) {
                 sf::RectangleShape r1 = entity->getHitbox();
                 if (sf::RectangleShape r2 = this->getHitbox(); r1.getGlobalBounds().intersects(r2.getGlobalBounds())) {
-                    entity->takeDamage(damage);
+                    entity->takeDamage(damage.get());
                     this->setDeletionMark(true);
                 }
             }

@@ -1,7 +1,16 @@
 #include "entity.h"
+
+#include <utility>
 #include "utils.h"
 
-Entity::Entity(int x, int y, int health, std::string name, int ticks, int damage) : x(x), y(y), health(health), ticks(ticks), maxTicks(ticks),damage(damage), name(std::move(name)) {
+Entity::Entity(int x, int y, int health, std::string name, int ticks, int damage) : x(),y(),health(),maxTicks(),ticks(),damage() {
+    this->x.set(x);
+    this->y.set(y);
+    this->health.set(health);
+    this->name.set(std::move(name));
+    this->ticks.set(ticks);
+    this->maxTicks.set(ticks);
+    this->damage.set(damage);
     hitbox.setSize(sf::Vector2f(static_cast<float>(Settings::keyCoords["hitboxSize"][0].first.x),static_cast<float>(Settings::keyCoords["hitboxSize"][0].first.y)));
     hitbox.setScale(2.f,2.f);
     hitbox.setPosition(static_cast<float>(x),static_cast<float>(y));
@@ -22,12 +31,12 @@ Entity& Entity::operator=(const Entity& other) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Entity& Entity) {
-    os << "Zombie(name: " << Entity.name
-       << ", x: " << Entity.x
-       << ", y: " << Entity.y
-       << ", health: " << Entity.health
-       << ", ticks: " << Entity.ticks
-       << ", damage: " << Entity.damage
+    os << "Zombie(name: " << Entity.name.get()
+       << ", x: " << Entity.x.get()
+       << ", y: " << Entity.y.get()
+       << ", health: " << Entity.health.get()
+       << ", ticks: " << Entity.ticks.get()
+       << ", damage: " << Entity.damage.get()
        << ")";
     return os;
 }
@@ -38,8 +47,8 @@ std::ostream& operator<<(std::ostream& os, const Entity& Entity) {
 // }
 
 void Entity::takeDamage(const int dmg) {
-    health -= dmg;
-    if (health <= 0) {
+    health.modify(-dmg);
+    if (health.get() <= 0) {
         setDeletionMark(true);
     }
 }
@@ -53,15 +62,15 @@ void Entity::setDeletionMark(const bool mark) {
 }
 
 std::string Entity::getName() {
-    return name;
+    return name.get();
 }
 
 bool Entity::getDeletionMark() const {
-    return deletionMark;
+    return deletionMark.get();
 }
 
 std::pair<int, int> Entity::getPosition() {
-    return std::make_pair(x, y);
+    return std::make_pair(x.get(), y.get());
 }
 
 sf::RectangleShape& Entity::getHitbox() {
@@ -69,5 +78,5 @@ sf::RectangleShape& Entity::getHitbox() {
 }
 
 int Entity::getDamage() const {
-    return damage;
+    return damage.get();
 }

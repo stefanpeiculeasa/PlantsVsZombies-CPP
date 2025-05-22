@@ -143,6 +143,7 @@ add_executable(${MAIN_EXECUTABLE_NAME} main.cpp ${SOURCES}
         src/peashooter.cpp
         src/wallnut.cpp
         include/stat.h
+        include/exceptions.h
 )
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")

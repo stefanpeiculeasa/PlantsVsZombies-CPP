@@ -6,22 +6,22 @@ Zombie::Zombie(const int x, const int y, const int health, const int speed, std:
     : Entity(x,y, health,std::move(name),ticks,damage), speed(speed) {}
 
 void Zombie::moveForward() {
-    if (canMove) {
-        x-=speed;
-        hitbox.setPosition(static_cast<float>(x),static_cast<float>(y));
+    if (canMove.get()) {
+        x.modify(-speed);
+        hitbox.setPosition(static_cast<float>(x.get()),static_cast<float>(y.get()));
     }
 }
 
 void Zombie::attack(const std::unique_ptr<Entity>& plant) {
-    ticks -= 1;
-    if (ticks == 0){
-        plant->takeDamage(damage);
+    ticks.modify(-1);
+    if (ticks.get() == 0){
+        plant->takeDamage(damage.get());
         ticks = maxTicks;
     }
 }
 
 void Zombie::update(Grid &grid) {
-    if (health <= 0) {
+    if (health.get() <= 0) {
         this->setDeletionMark(true);
         return;
     }
