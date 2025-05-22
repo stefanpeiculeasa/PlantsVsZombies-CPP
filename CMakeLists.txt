@@ -144,6 +144,9 @@ add_executable(${MAIN_EXECUTABLE_NAME} main.cpp ${SOURCES}
         src/wallnut.cpp
         include/stat.h
         include/exceptions.h
+        src/game.cpp
+        src/projectile.cpp
+        src/renderer.cpp
 )
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")

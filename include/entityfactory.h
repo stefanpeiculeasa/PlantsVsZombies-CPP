@@ -6,14 +6,10 @@
 
 class EntityFactory {
     public:
-    enum class EntityType {
-        Peashooter,
-        Wallnut,
-        Sunflower,
-        BasicZombie
-    };
-
-    static std::unique_ptr<Entity> createEntity(EntityType type,int x, int y);
+    static std::unique_ptr<Entity> createPeashooter(int x, int y);
+    static std::unique_ptr<Entity> createWallnut(int x, int y);
+    static std::unique_ptr<Entity> createSunflower(int x, int y);
+    static std::unique_ptr<Entity> createBasicZombie(int x, int y);
 };
 
 #endif

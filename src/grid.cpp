@@ -20,7 +20,7 @@ void Grid::addEntity(std::unique_ptr<Entity> entity) {
 void Grid::update() {
     zombieSpawnTicks -= 1;
     if (zombieSpawnTicks == 0) {
-        entities.push_back(EntityFactory::createEntity(EntityFactory::EntityType::BasicZombie,1500,Settings::rows[Settings::random(0,static_cast<int>(Settings::rows.size()-1))]));
+        entities.push_back(EntityFactory::createBasicZombie(1500,Settings::rows[Settings::random(0,static_cast<int>(Settings::rows.size()-1))]));
         zombiesAmount -= 1;
         if (zombiesAmount == 0) {
             zombieSpawnTicks = -1;
@@ -120,11 +120,11 @@ void Grid::handleClick(const sf::Vector2f mousePos) {
             if (center.second) break;
             clicked = true;
             if (selectedPlant == "peashooter") {
-                addEntity(EntityFactory::createEntity(EntityFactory::EntityType::Peashooter,center.first.x,center.first.y));
+                addEntity(EntityFactory::createPeashooter(center.first.x,center.first.y));
             } else if (selectedPlant == "wallnut") {
-                addEntity(EntityFactory::createEntity(EntityFactory::EntityType::Wallnut,center.first.x,center.first.y));
+                addEntity(EntityFactory::createWallnut(center.first.x,center.first.y));
             } else if (selectedPlant == "sunflower") {
-                addEntity(EntityFactory::createEntity(EntityFactory::EntityType::Sunflower,center.first.x,center.first.y));
+                addEntity(EntityFactory::createSunflower(center.first.x,center.first.y));
             } else break;
             center.second = true;
             break;

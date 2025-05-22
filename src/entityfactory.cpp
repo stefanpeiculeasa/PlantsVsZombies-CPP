@@ -6,18 +6,18 @@
 #include "sunflower.h"
 #include "basiczombie.h"
 
-std::unique_ptr<Entity> EntityFactory::createEntity(const EntityType type, int x, int y) {
-    {
-        switch (type) {
-            case EntityType::Peashooter:
-                return std::make_unique<Peashooter>(x,y);
-            case EntityType::Wallnut:
-                return std::make_unique<Wallnut>(x,y);
-            case EntityType::Sunflower:
-                return std::make_unique<Sunflower>(x,y);
-            case EntityType::BasicZombie:
-                return std::make_unique<BasicZombie>(x,y);
-            default: return nullptr;
-        }
-    }
+std::unique_ptr<Entity> EntityFactory::createPeashooter(const int x,const int y) {
+    return std::make_unique<Peashooter>(x,y);
+}
+
+std::unique_ptr<Entity> EntityFactory::createWallnut(const int x,const int y) {
+    return std::make_unique<Wallnut>(x,y);
+}
+
+std::unique_ptr<Entity> EntityFactory::createSunflower(const int x,const int y) {
+    return std::make_unique<Sunflower>(x,y);
+}
+
+std::unique_ptr<Entity> EntityFactory::createBasicZombie(const int x,const int y) {
+    return std::make_unique<BasicZombie>(x,y);
 }

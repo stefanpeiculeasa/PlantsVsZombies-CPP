@@ -15,7 +15,7 @@ namespace Settings {
     inline constexpr int sunValue = 5;
     inline constexpr int sunRange = 150;
     inline constexpr std::pair<int,int> spawnAmount = std::make_pair(15, 30);
-    inline constexpr std::pair<int,int> spawnInterval = std::make_pair(5,10);
+    inline constexpr std::pair<int,int> spawnInterval = std::make_pair(3,6);
     inline const std::string defaultPlant = "peashooter";
     inline std::unordered_map<std::string, std::vector<std::pair<sf::Vector2i, bool>>> keyCoords = {
         {"tileCenters", {

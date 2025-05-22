@@ -8,5 +8,4 @@ public:
     BasicZombie(int x,int y);
 };
 
-
 #endif

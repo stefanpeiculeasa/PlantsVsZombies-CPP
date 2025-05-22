@@ -3,14 +3,7 @@
 #include <utility>
 #include "utils.h"
 
-Entity::Entity(int x, int y, int health, std::string name, int ticks, int damage) : x(),y(),health(),ticks(),maxTicks(),damage() {
-    this->x.set(x);
-    this->y.set(y);
-    this->health.set(health);
-    this->name.set(std::move(name));
-    this->ticks.set(ticks);
-    this->maxTicks.set(ticks);
-    this->damage.set(damage);
+Entity::Entity(const int x,const int y,const int health, std::string name,const int ticks,const int damage) : x(x),y(y),health(health),ticks(ticks),maxTicks(ticks),damage(damage),name(std::move(name)) {
     hitbox.setSize(sf::Vector2f(static_cast<float>(Settings::keyCoords["hitboxSize"][0].first.x),static_cast<float>(Settings::keyCoords["hitboxSize"][0].first.y)));
     hitbox.setScale(2.f,2.f);
     hitbox.setPosition(static_cast<float>(x),static_cast<float>(y));
