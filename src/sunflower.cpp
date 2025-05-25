@@ -13,6 +13,6 @@ void Sunflower::attack(Grid &grid) {
     int suny = Settings::random(-150,150);
     auto finalPos = sf::Vector2i(sunx + x.get(), suny + y.get());
 
-    auto sun = std::make_unique<Sun>(x.get(), y.get(), 0, 1, finalPos);
+    auto sun = std::make_unique<Sun>(x.get(), y.get(),finalPos);
     grid.addEntity(std::move(sun));
 }

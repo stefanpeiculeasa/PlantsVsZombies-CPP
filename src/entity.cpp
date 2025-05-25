@@ -9,6 +9,12 @@ Entity::Entity(const int x,const int y,const int health, std::string name,const 
     hitbox.setPosition(static_cast<float>(x),static_cast<float>(y));
     }
 
+Entity::Entity(const int x,const int y,std::string name) : x(x),y(y),health(1),ticks(1),maxTicks(1),damage(0),name(std::move(name)) {
+    hitbox.setSize(sf::Vector2f(static_cast<float>(Settings::keyCoords["hitboxSize"][0].first.x),static_cast<float>(Settings::keyCoords["hitboxSize"][0].first.y)));
+    hitbox.setScale(2.f,2.f);
+    hitbox.setPosition(static_cast<float>(x),static_cast<float>(y));
+}
+
 Entity::Entity(const Entity &other) : x(other.x), y(other.y),health(other.health), ticks(other.ticks), maxTicks(ticks), damage(other.damage), name(other.name), hitbox(other.hitbox) {}
 
 Entity& Entity::operator=(const Entity& other) {

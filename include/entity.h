@@ -28,6 +28,8 @@ protected:
 public:
     Entity(int x,int y,int health,std::string name,int ticks,int damage);
 
+    Entity(int x,int y,std::string name);
+
     Entity(const Entity& other);
 
     Entity& operator=(const Entity& other);

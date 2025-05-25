@@ -2,7 +2,8 @@
 #include <cmath>
 #include "grid.h"
 
-Sun::Sun(const int x, const int y, const int damage, const int speed, const sf::Vector2i finalPos)  : Entity(x,y,1,"sun",1,damage), speed(speed), finalPos(finalPos) {}
+Sun::Sun(const int x, const int y, const sf::Vector2i finalPos)  :
+    Entity(x,y,"sun"), finalPos(finalPos) {}
 
 void Sun::move() {
     auto dx = static_cast<float>(finalPos.x - x.get());
@@ -12,8 +13,8 @@ void Sun::move() {
         dx /= length;
         dy /= length;
 
-        const float new_x = static_cast<float>(x.get()) + dx*static_cast<float>(speed);
-        const float new_y = static_cast<float>(y.get()) + dy*static_cast<float>(speed);
+        const float new_x = static_cast<float>(x.get()) + dx*static_cast<float>(1);
+        const float new_y = static_cast<float>(y.get()) + dy*static_cast<float>(1);
 
         x = static_cast<int>(new_x);
         y = static_cast<int>(new_y);
