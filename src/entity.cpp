@@ -1,5 +1,5 @@
 #include "entity.h"
-
+#include <iostream>
 #include <utility>
 #include "utils.h"
 
@@ -34,10 +34,25 @@ std::ostream& operator<<(std::ostream& os, const Entity& Entity) {
     return os;
 }
 
-// std::istream& operator>>(std::istream& is, Entity& Entity) {
-//     is >> Entity.name;
-//     return is;
-// }
+std::istream& operator>>(std::istream& is, Entity& Entity) {
+    int bufferI;
+    std::string bufferS;
+    std::cout << "Write entity name,x,y,health,ticks and damage:" << std::endl;
+    is >> bufferS;
+    Entity.name.set(bufferS);
+    is >> bufferI;
+    Entity.x.set(bufferI);
+    is >> bufferI;
+    Entity.y.set(bufferI);
+    is >> bufferI;
+    Entity.health.set(bufferI);
+    is >> bufferI;
+    Entity.ticks.set(bufferI);
+    is >> bufferI;
+    Entity.damage.set(bufferI);
+
+    return is;
+}
 
 void Entity::takeDamage(const int dmg) {
     health.modify(-dmg);
