@@ -1,5 +1,6 @@
 #include "game.h"
 #include "renderer.h"
+#include <iostream>
 
 
 Game& Game::getInstance() {
@@ -37,9 +38,17 @@ void Game::run() {
             }
         }
 
-        if (grid.getPlayerHp() <= 0)
+        if (grid.getPlayerHp() <= 0) {
             stop();
+            std::cout << "You lost!" << std::endl;
             window.close();
+        }
+        if (grid.getZombiesAmount() <= 0) {
+            stop();
+            std::cout << "You won!" << std::endl;
+            window.close();
+        }
+
 
         grid.update();
         renderer.renderFrame(window, grid, grid.getSun(), grid.getPlayerHp(), grid.getSelectedPlant(), grid.getZombiesAmount());

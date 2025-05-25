@@ -1,7 +1,5 @@
 #include "grid.h"
-
 #include <iostream>
-
 #include "plant.h"
 #include "sun.h"
 #include "entityfactory.h"
@@ -22,10 +20,7 @@ void Grid::update() {
     if (zombieSpawnTicks == 0) {
         entities.push_back(EntityFactory::createBasicZombie(1500,Settings::rows[Settings::random(0,static_cast<int>(Settings::rows.size()-1))]));
         zombiesAmount -= 1;
-        if (zombiesAmount == 0) {
-            zombieSpawnTicks = -1;
-        }
-        else zombieSpawnTicks = Settings::random(Settings::spawnInterval.first * Settings::fps, Settings::spawnInterval.second * Settings::fps);
+        zombieSpawnTicks = Settings::random(Settings::spawnInterval.first * Settings::fps, Settings::spawnInterval.second * Settings::fps);
     }
 
     for (auto it = entities.begin(); it != entities.end();) {
