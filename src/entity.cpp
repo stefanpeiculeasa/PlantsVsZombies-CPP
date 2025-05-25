@@ -50,7 +50,6 @@ std::istream& operator>>(std::istream& is, Entity& Entity) {
     Entity.ticks.set(bufferI);
     is >> bufferI;
     Entity.damage.set(bufferI);
-
     return is;
 }
 
