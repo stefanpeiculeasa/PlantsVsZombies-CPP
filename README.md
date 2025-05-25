@@ -2,6 +2,17 @@
 
 A basic remake of the classic Plants vs. Zombies game, built in C++ using simple graphics and object-oriented programming. This version includes core gameplay elements like planting defensive units, spawning waves of enemies, and managing resources. 
 
+How to play:
+
+Press 1,2,3 to select Peashooter, Wallnut and Sunflower.
+Each one requires an amount of sun to plant.
+- the peashooter is your main offensive unit.
+- the wallnut is the defensive unit.
+- the sunflower is used to generate more sun to place other units.
+
+If a zombie reaches the house, you lose some health, if it reaches zero you die. To win, defeat all the zombies.
+
+
 ## Instrucțiuni de compilare
 
 Proiectul este configurat cu CMake.
@@ -49,7 +60,7 @@ Nerespectarea duce la nepunctarea proiectului
     - [ ] destructor [*](https://github.com/Ionnier/poo/tree/main/labs/L02#crearea-obiectelor)
     - [ ] `operator<<` pentru afișare (std::ostream) [*](https://github.com/Ionnier/poo/blob/main/labs/L02/fractie.cpp#L123)
     - [ ] `operator>>` pentru citire (std::istream) [*](https://github.com/Ionnier/poo/blob/main/labs/L02/fractie.cpp#L128)
-    - [x] alt operator supraîncărcat ca funcție membră [*](https://github.com/Ionnier/poo/blob/main/labs/L02/fractie.cpp#L32)
+    - [ ] alt operator supraîncărcat ca funcție membră [*](https://github.com/Ionnier/poo/blob/main/labs/L02/fractie.cpp#L32)
     - [ ] alt operator supraîncărcat ca funcție non-membră [*](https://github.com/Ionnier/poo/blob/main/labs/L02/fractie.cpp#L39) - nu neaparat ca friend
   - in derivate
       - [ ] implementarea funcționalităților alese prin [upcast](https://github.com/Ionnier/poo/tree/main/labs/L04#solu%C8%9Bie-func%C8%9Bii-virtuale-late-binding) și [downcast](https://github.com/Ionnier/poo/tree/main/labs/L04#smarter-downcast-dynamic-cast)
