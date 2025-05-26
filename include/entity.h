@@ -41,9 +41,9 @@ public:
 
     virtual void takeDamage(int dmg);
 
-    [[nodiscard]] std::string getName();
+    [[nodiscard]] std::string getName() const;
     [[nodiscard]] bool getDeletionMark() const;
-    [[nodiscard]] std::pair<int, int> getPosition();
+    [[nodiscard]] std::pair<int, int> getPosition() const;
     [[nodiscard]] sf::RectangleShape& getHitbox();
     [[nodiscard]] int getDamage() const;
 

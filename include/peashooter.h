@@ -7,7 +7,7 @@ class Peashooter final : public Plant {
 public:
     Peashooter(int x,int y);
 
-    void attack(Grid& grid) override;
+    void action(Grid& grid) override;
 };
 
 

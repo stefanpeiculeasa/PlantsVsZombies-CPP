@@ -8,7 +8,7 @@ class Sunflower final : public Plant {
 public:
     Sunflower(int x, int y);
 
-    void attack(Grid& grid) override;
+    void action(Grid& grid) override;
 
 };
 

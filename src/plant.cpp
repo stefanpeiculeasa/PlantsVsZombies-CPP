@@ -7,7 +7,7 @@ void Plant::update(Grid &grid) {
     ticks.modify(-1);
     if (ticks.get() == 0) {
         ticks = maxTicks;
-        attack(grid);
+        action(grid);
     }
 }
 

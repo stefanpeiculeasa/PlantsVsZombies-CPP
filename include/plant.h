@@ -10,7 +10,7 @@ protected:
 public:
     Plant(int x, int y,int health,int cost, std::string name,int ticks,int damage);
 
-    virtual void attack(Grid& grid) = 0;
+    virtual void action(Grid& grid) = 0;
 
     void update(Grid& grid) override;
 

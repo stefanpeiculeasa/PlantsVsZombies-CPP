@@ -7,7 +7,7 @@
 
 Sunflower::Sunflower(const int x,const int y) : Plant(x, y, 100, 5, "sunflower",600,0) {}
 
-void Sunflower::attack(Grid &grid) {
+void Sunflower::action(Grid &grid) {
 
     int sunx = Settings::random(-150,150);
     int suny = Settings::random(-150,150);

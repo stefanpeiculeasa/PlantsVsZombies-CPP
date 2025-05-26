@@ -12,7 +12,7 @@ void Zombie::moveForward() {
     }
 }
 
-void Zombie::attack(const std::unique_ptr<Entity>& plant) {
+void Zombie::action(const std::unique_ptr<Entity>& plant) {
     ticks.modify(-1);
     if (ticks.get() == 0){
         plant->takeDamage(damage.get());
@@ -43,7 +43,7 @@ void Zombie::update(Grid &grid) {
             sf::FloatRect Hitbox = this->getHitbox().getGlobalBounds();
             if (Hitbox.contains(entity->getHitbox().getPosition())) {
                 this->setCanMove(false);
-                attack(entity);
+                action(entity);
             }
         }
     }

@@ -13,7 +13,7 @@ public:
 
     void moveForward();
 
-    void attack(const std::unique_ptr<Entity>& plant);
+    void action(const std::unique_ptr<Entity>& plant);
 
     void update(Grid& grid) override;
 };

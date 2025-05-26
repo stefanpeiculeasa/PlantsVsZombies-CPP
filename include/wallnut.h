@@ -7,7 +7,7 @@ class Wallnut final : public Plant {
 public:
     Wallnut(int x,int y);
 
-    void attack(Grid& grid) override;
+    void action(Grid& grid) override;
 };
 
 

@@ -74,7 +74,7 @@ void Entity::setDeletionMark(const bool mark) {
     this->deletionMark = mark;
 }
 
-std::string Entity::getName() {
+std::string Entity::getName() const {
     return name.get();
 }
 
@@ -82,7 +82,7 @@ bool Entity::getDeletionMark() const {
     return deletionMark.get();
 }
 
-std::pair<int, int> Entity::getPosition() {
+std::pair<int, int> Entity::getPosition() const {
     return std::make_pair(x.get(), y.get());
 }
 
