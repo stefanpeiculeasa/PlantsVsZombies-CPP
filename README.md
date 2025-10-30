@@ -21,3 +21,22 @@ A lightweight remake of the classic *Plants vs. Zombies* game, implemented in C+
 
 - **Win**: Defeat all zombies before they reach your house.
 - **Lose**: Zombies that enter the house reduce your health. If health reaches **0**, the game ends.
+
+## Compilation instructions
+
+The project is configured with CMake.
+
+Terminal instructions:
+
+1. Configuration step  
+```sh
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+# or ./scripts/cmake.sh configure
+```
+
+Or on Windows with GCC:
+```sh
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -G Ninja
+# or ./scripts/cmake.sh configure -g Ninja
+```
+At this step, we can request the generation of project files for various development environments.
